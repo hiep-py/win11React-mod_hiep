@@ -6,7 +6,9 @@ function process() {
   if (percentage > 100) {
     percentage = 100;
   }
-  percentageElement.innerText = percentage;
+  if (percentageElement) {
+    percentageElement.innerText = percentage;
+  }
   processInterval();
 }
 
