@@ -19,6 +19,8 @@ export * from "./apps/taskmanager";
 export * from "./apps/terminal";
 export * from "./apps/whiteboard";
 export * from "./apps/vscode";
+export * from "./apps/zalo";
+export * from "./apps/iframeApp";
 
 export const ScreenPreview = () => {
   const tasks = useSelector((state) => state.taskbar);

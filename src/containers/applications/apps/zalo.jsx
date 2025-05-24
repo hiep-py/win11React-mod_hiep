@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ToolBar } from "../../../utils/general";
 
-export const VSCode = () => {
+export const Zalo = () => {
   const [error, setError] = useState(false);
-  const wnapp = useSelector((state) => state.apps.vscode);
-  const iframeSrc = "https://codesandbox.io/p/sandbox/github/codesandbox/sandbox-templates/tree/main/python-flask-server";
+  const wnapp = useSelector((state) => state.apps.zalo);
+  const iframeSrc = "https://chat.zalo.me/";
   
   if (!wnapp) return null;
 
   return (
     <div
-      className="vscode floatTab dpShad"
+      className="zalo floatTab dpShad"
       data-size={wnapp.size}
       data-max={wnapp.max}
       style={{
@@ -25,7 +25,7 @@ export const VSCode = () => {
         app={wnapp.action}
         icon={wnapp.icon}
         size={wnapp.size}
-        name="Visual Studio Code"
+        name="Zalo Chat"
       />
       <div className="windowScreen flex flex-col" data-dock="true">
         <div className="restWindow h-full flex-grow">

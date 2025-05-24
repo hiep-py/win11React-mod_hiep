@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToolBar } from "../../../utils/general";
 
-export const VSCode = () => {
+// Đây là component tái sử dụng cho các ứng dụng dùng iframe
+export const IframeApp = ({ appName, appIcon, windowTitle, iframeSrc, customProps = {} }) => {
   const [error, setError] = useState(false);
-  const wnapp = useSelector((state) => state.apps.vscode);
-  const iframeSrc = "https://codesandbox.io/p/sandbox/github/codesandbox/sandbox-templates/tree/main/python-flask-server";
+  const apps = useSelector((state) => state.apps);
+  const wnapp = apps && apps[appIcon];
   
-  if (!wnapp) return null;
+  // Kiểm tra nếu wnapp không tồn tại
+  if (!wnapp) {
+    console.error(`App ${appIcon} not found in state`);
+    return null; // Không render gì cả nếu không tìm thấy ứng dụng
+  }
 
   return (
     <div
-      className="vscode floatTab dpShad"
+      className={`${appIcon} floatTab dpShad`}
       data-size={wnapp.size}
       data-max={wnapp.max}
       style={{
@@ -25,7 +30,7 @@ export const VSCode = () => {
         app={wnapp.action}
         icon={wnapp.icon}
         size={wnapp.size}
-        name="Visual Studio Code"
+        name={windowTitle || appName}
       />
       <div className="windowScreen flex flex-col" data-dock="true">
         <div className="restWindow h-full flex-grow">
@@ -37,6 +42,7 @@ export const VSCode = () => {
               allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
               sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               onError={() => setError(true)}
+              {...customProps}
             ></iframe>
           )}
           {error && (

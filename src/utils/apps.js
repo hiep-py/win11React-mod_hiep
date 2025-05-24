@@ -306,6 +306,12 @@ const apps = [
     type: "app",
     action: "VSCODE",
   },
+  {
+    name: "Zalo",
+    icon: "zalo",
+    type: "app",
+    action: "ZALO",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {
