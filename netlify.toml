@@ -1,0 +1,7 @@
+[build]
+  command = "CI=false npm run turbuild"
+  publish = "build"
+
+[build.environment]
+  ESLINT_NO_DEV_ERRORS = "true"
+  CI = "false" 
