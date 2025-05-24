@@ -4,4 +4,18 @@
 
 [build.environment]
   ESLINT_NO_DEV_ERRORS = "true"
-  CI = "false" 
+  CI = "false"
+  NODE_VERSION = "16"
+
+# Xử lý SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cấu hình headers để giải quyết vấn đề CORS
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "SAMEORIGIN" 
