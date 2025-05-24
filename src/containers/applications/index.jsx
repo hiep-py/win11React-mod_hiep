@@ -20,6 +20,8 @@ export * from "./apps/terminal";
 export * from "./apps/whiteboard";
 export * from "./apps/vscode";
 export * from "./apps/zalo";
+export * from "./apps/perplexity";
+export * from "./apps/chatgpt";
 export * from "./apps/iframeApp";
 
 export const ScreenPreview = () => {

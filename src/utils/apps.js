@@ -312,6 +312,18 @@ const apps = [
     type: "app",
     action: "ZALO",
   },
+  {
+    name: "Perplexity AI",
+    icon: "perplexity",
+    type: "app",
+    action: "PERPLEXITY",
+  },
+  {
+    name: "ChatGPT",
+    icon: "chatgpt",
+    type: "app",
+    action: "CHATGPT",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {
