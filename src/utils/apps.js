@@ -300,6 +300,12 @@ const apps = [
     type: "app",
     action: "DISCORD",
   },
+  {
+    name: "VS Code",
+    icon: "vscode",
+    type: "app",
+    action: "VSCODE",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {
