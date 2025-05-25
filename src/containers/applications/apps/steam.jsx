@@ -4,6 +4,130 @@ import { Icon, Image, ToolBar, LazyComponent } from "../../../utils/general";
 import "./assets/steam.scss";
 import steamGames from "./assets/steam-games.json";
 
+// Định nghĩa các bản dịch
+const translations = {
+  en: {
+    library: "Library",
+    store: "Store",
+    community: "Community",
+    profile: "Profile",
+    search: "Search games...",
+    yourLibrary: "Your Game Library",
+    hoursPlayed: "hours played",
+    notPlayed: "Not played",
+    featured: "Featured & Recommended",
+    popularCategories: "Popular Categories",
+    action: "Action",
+    adventure: "Adventure",
+    rpg: "RPG",
+    indie: "Indie",
+    strategy: "Strategy",
+    sports: "Sports & Racing",
+    newReleases: "New Releases",
+    communityHub: "Steam Community",
+    friendActivity: "Friend Activity",
+    playing: "is playing",
+    purchased: "purchased",
+    news: "Featured News",
+    summerUpdate: "Summer 2023 Update",
+    summerUpdateDesc: "Steam has launched many new features in the summer 2023 update...",
+    summerSale: "Summer Sale Coming Soon",
+    summerSaleDesc: "Get your wallet ready! The summer sale starts next week...",
+    achievements: "Achievements",
+    gamesOwned: "Games Owned",
+    reviews: "Reviews",
+    friends: "Friends",
+    recentActivity: "Recent Activity",
+    achievedIn: "Achieved achievement",
+    playedFor: "Played for",
+    yesterday: "Yesterday",
+    hoursAgo: "hours ago",
+    overview: "Overview",
+    dlc: "DLC",
+    achievementsTab: "Achievements",
+    description: "Description",
+    release: "Release:",
+    developer: "Developer:",
+    publisher: "Publisher:",
+    genres: "Genres:",
+    screenshots: "Screenshots",
+    availableDLC: "Available Downloadable Content",
+    noDLC: "No DLC available for this game.",
+    noAchievements: "No achievements available for this game.",
+    ofPlayersEarned: "of players earned",
+    systemRequirements: "System Requirements",
+    minimum: "Minimum:",
+    recommended: "Recommended:",
+    playNow: "Play Now",
+    install: "Install",
+    addToWishlist: "Add to Wishlist",
+    priceInfo: "Price Info",
+    level: "Level",
+    online: "Online",
+    in: "in"
+  },
+  vi: {
+    library: "Thư viện",
+    store: "Cửa hàng",
+    community: "Cộng đồng",
+    profile: "Hồ sơ",
+    search: "Tìm kiếm game...",
+    yourLibrary: "Thư viện game của bạn",
+    hoursPlayed: "giờ chơi",
+    notPlayed: "Chưa chơi",
+    featured: "Khuyến nghị & Nổi bật",
+    popularCategories: "Danh mục phổ biến",
+    action: "Hành động",
+    adventure: "Phiêu lưu",
+    rpg: "Nhập vai",
+    indie: "Indie",
+    strategy: "Chiến thuật",
+    sports: "Thể thao & Đua xe",
+    newReleases: "Game mới phát hành",
+    communityHub: "Cộng đồng Steam",
+    friendActivity: "Hoạt động bạn bè",
+    playing: "đang chơi",
+    purchased: "đã mua",
+    news: "Tin tức nổi bật",
+    summerUpdate: "Cập nhật mùa hè 2023",
+    summerUpdateDesc: "Steam đã ra mắt nhiều tính năng mới trong cập nhật mùa hè 2023...",
+    summerSale: "Sale mùa hè sắp bắt đầu",
+    summerSaleDesc: "Chuẩn bị ví tiền của bạn! Sale mùa hè sẽ bắt đầu vào tuần tới...",
+    achievements: "Thành tựu",
+    gamesOwned: "Game đã sở hữu",
+    reviews: "Nhận xét",
+    friends: "Bạn bè",
+    recentActivity: "Hoạt động gần đây",
+    achievedIn: "Đã đạt được thành tựu",
+    playedFor: "Đã chơi",
+    yesterday: "Hôm qua",
+    hoursAgo: "giờ trước",
+    overview: "Tổng quan",
+    dlc: "DLC",
+    achievementsTab: "Thành tựu",
+    description: "Mô tả",
+    release: "Phát hành:",
+    developer: "Nhà phát triển:",
+    publisher: "Nhà phát hành:",
+    genres: "Thể loại:",
+    screenshots: "Ảnh chụp màn hình",
+    availableDLC: "Nội dung tải xuống có sẵn",
+    noDLC: "Không có DLC nào cho game này.",
+    noAchievements: "Không có thành tựu nào cho game này.",
+    ofPlayersEarned: "người chơi đạt được",
+    systemRequirements: "Yêu cầu hệ thống",
+    minimum: "Tối thiểu:",
+    recommended: "Đề nghị:",
+    playNow: "Chơi ngay",
+    install: "Cài đặt",
+    addToWishlist: "Thêm vào danh sách mong muốn",
+    priceInfo: "Thông tin giá",
+    level: "Level",
+    online: "Online",
+    in: "trong"
+  }
+};
+
 export const Steam = () => {
   const wnapp = useSelector((state) => state.apps.steam);
   const dispatch = useDispatch();
@@ -11,6 +135,8 @@ export const Steam = () => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredGames, setFilteredGames] = useState(steamGames);
+  const [language, setLanguage] = useState("vi"); // Default language is Vietnamese
+  const t = translations[language]; // Get translations based on selected language
 
   useEffect(() => {
     if (searchQuery.trim() === "") {
@@ -29,6 +155,10 @@ export const Steam = () => {
 
   const closeGameDetails = () => {
     setSelectedGame(null);
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "vi" ? "en" : "vi");
   };
 
   return (
@@ -62,47 +192,50 @@ export const Steam = () => {
                   onClick={() => setTab("library")}
                 >
                   <Icon fafa="faGamepad" />
-                  <span>Thư viện</span>
+                  <span>{t.library}</span>
                 </div>
                 <div 
                   className={`nav-item ${tab === "store" ? "active" : ""}`}
                   onClick={() => setTab("store")}
                 >
                   <Icon fafa="faStore" />
-                  <span>Cửa hàng</span>
+                  <span>{t.store}</span>
                 </div>
                 <div 
                   className={`nav-item ${tab === "community" ? "active" : ""}`}
                   onClick={() => setTab("community")}
                 >
                   <Icon fafa="faUsers" />
-                  <span>Cộng đồng</span>
+                  <span>{t.community}</span>
                 </div>
                 <div 
                   className={`nav-item ${tab === "profile" ? "active" : ""}`}
                   onClick={() => setTab("profile")}
                 >
                   <Icon fafa="faUser" />
-                  <span>Hồ sơ</span>
+                  <span>{t.profile}</span>
                 </div>
               </div>
             </div>
             <div className="steam-content">
               {selectedGame ? (
-                <GameDetails game={selectedGame} onClose={closeGameDetails} />
+                <GameDetails game={selectedGame} onClose={closeGameDetails} lang={language} t={t} />
               ) : (
                 <>
                   <div className="steam-header">
                     <div className="search-bar">
                       <input
                         type="text"
-                        placeholder="Tìm kiếm game..."
+                        placeholder={t.search}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                       />
                       <Icon fafa="faSearch" />
                     </div>
                     <div className="header-actions">
+                      <div className="language-toggle" onClick={toggleLanguage}>
+                        {language === "vi" ? "EN" : "VI"}
+                      </div>
                       <Icon fafa="faCog" />
                       <Icon fafa="faDownload" />
                       <div className="user-info">
@@ -112,13 +245,13 @@ export const Steam = () => {
                     </div>
                   </div>
                   {tab === "library" && (
-                    <LibraryTab games={filteredGames} onGameClick={openGameDetails} />
+                    <LibraryTab games={filteredGames} onGameClick={openGameDetails} t={t} />
                   )}
                   {tab === "store" && (
-                    <StoreTab games={filteredGames} onGameClick={openGameDetails} />
+                    <StoreTab games={filteredGames} onGameClick={openGameDetails} t={t} />
                   )}
-                  {tab === "community" && <CommunityTab />}
-                  {tab === "profile" && <ProfileTab />}
+                  {tab === "community" && <CommunityTab t={t} />}
+                  {tab === "profile" && <ProfileTab t={t} />}
                 </>
               )}
             </div>
@@ -129,10 +262,10 @@ export const Steam = () => {
   );
 };
 
-const LibraryTab = ({ games, onGameClick }) => {
+const LibraryTab = ({ games, onGameClick, t }) => {
   return (
     <div className="library-container">
-      <h2>Thư viện game của bạn</h2>
+      <h2>{t.yourLibrary}</h2>
       <div className="games-grid">
         {games.map((game) => (
           <div key={game.id} className="game-card" onClick={() => onGameClick(game)}>
@@ -142,8 +275,8 @@ const LibraryTab = ({ games, onGameClick }) => {
             <div className="game-info">
               <h3>{game.title}</h3>
               <div className="game-meta">
-                <span className="playtime">{game.playtime || "0"} giờ chơi</span>
-                <span className="last-played">{game.lastPlayed || "Chưa chơi"}</span>
+                <span className="playtime">{game.playtime || "0"} {t.hoursPlayed}</span>
+                <span className="last-played">{game.lastPlayed || t.notPlayed}</span>
               </div>
             </div>
           </div>
@@ -153,11 +286,11 @@ const LibraryTab = ({ games, onGameClick }) => {
   );
 };
 
-const StoreTab = ({ games, onGameClick }) => {
+const StoreTab = ({ games, onGameClick, t }) => {
   return (
     <div className="store-container">
       <div className="featured-section">
-        <h2>Khuyến nghị & Nổi bật</h2>
+        <h2>{t.featured}</h2>
         <div className="featured-carousel">
           {games.slice(0, 3).map((game) => (
             <div key={game.id} className="featured-item" onClick={() => onGameClick(game)}>
@@ -172,18 +305,18 @@ const StoreTab = ({ games, onGameClick }) => {
         </div>
       </div>
       <div className="categories-section">
-        <h2>Danh mục phổ biến</h2>
+        <h2>{t.popularCategories}</h2>
         <div className="categories-list">
-          <div className="category">Hành động</div>
-          <div className="category">Phiêu lưu</div>
-          <div className="category">Nhập vai</div>
-          <div className="category">Indie</div>
-          <div className="category">Chiến thuật</div>
-          <div className="category">Thể thao & Đua xe</div>
+          <div className="category">{t.action}</div>
+          <div className="category">{t.adventure}</div>
+          <div className="category">{t.rpg}</div>
+          <div className="category">{t.indie}</div>
+          <div className="category">{t.strategy}</div>
+          <div className="category">{t.sports}</div>
         </div>
       </div>
       <div className="new-releases">
-        <h2>Game mới phát hành</h2>
+        <h2>{t.newReleases}</h2>
         <div className="games-grid">
           {games.slice(3, 9).map((game) => (
             <div key={game.id} className="store-game-card" onClick={() => onGameClick(game)}>
@@ -198,38 +331,38 @@ const StoreTab = ({ games, onGameClick }) => {
   );
 };
 
-const CommunityTab = () => {
+const CommunityTab = ({ t }) => {
   return (
     <div className="community-container">
-      <h2>Cộng đồng Steam</h2>
+      <h2>{t.communityHub}</h2>
       <div className="community-section">
         <div className="community-card">
-          <h3>Hoạt động bạn bè</h3>
+          <h3>{t.friendActivity}</h3>
           <div className="activity-list">
             <div className="activity-item">
               <img src="./img/steam/avatar.jpg" alt="User Avatar" />
               <div className="activity-info">
-                <span className="user-name">FriendUser1</span> đang chơi <span className="game-name">Counter-Strike 2</span>
+                <span className="user-name">FriendUser1</span> {t.playing} <span className="game-name">Counter-Strike 2</span>
               </div>
             </div>
             <div className="activity-item">
               <img src="./img/steam/avatar.jpg" alt="User Avatar" />
               <div className="activity-info">
-                <span className="user-name">FriendUser2</span> đã mua <span className="game-name">Baldur's Gate 3</span>
+                <span className="user-name">FriendUser2</span> {t.purchased} <span className="game-name">Baldur's Gate 3</span>
               </div>
             </div>
           </div>
         </div>
         <div className="community-card">
-          <h3>Tin tức nổi bật</h3>
+          <h3>{t.news}</h3>
           <div className="news-list">
             <div className="news-item">
-              <h4>Cập nhật mùa hè 2023</h4>
-              <p>Steam đã ra mắt nhiều tính năng mới trong cập nhật mùa hè 2023...</p>
+              <h4>{t.summerUpdate}</h4>
+              <p>{t.summerUpdateDesc}</p>
             </div>
             <div className="news-item">
-              <h4>Sale mùa hè sắp bắt đầu</h4>
-              <p>Chuẩn bị ví tiền của bạn! Sale mùa hè sẽ bắt đầu vào tuần tới...</p>
+              <h4>{t.summerSale}</h4>
+              <p>{t.summerSaleDesc}</p>
             </div>
           </div>
         </div>
@@ -238,7 +371,7 @@ const CommunityTab = () => {
   );
 };
 
-const ProfileTab = () => {
+const ProfileTab = ({ t }) => {
   return (
     <div className="profile-container">
       <div className="profile-header">
@@ -247,38 +380,38 @@ const ProfileTab = () => {
         </div>
         <div className="profile-info">
           <h2>Win11User</h2>
-          <div className="profile-status">Online</div>
-          <div className="profile-level">Level 10</div>
+          <div className="profile-status">{t.online}</div>
+          <div className="profile-level">{t.level} 10</div>
         </div>
       </div>
       <div className="profile-stats">
         <div className="stats-card">
-          <h3>Thành tựu</h3>
+          <h3>{t.achievements}</h3>
           <div className="stats-value">156/1000</div>
         </div>
         <div className="stats-card">
-          <h3>Game đã sở hữu</h3>
+          <h3>{t.gamesOwned}</h3>
           <div className="stats-value">25</div>
         </div>
         <div className="stats-card">
-          <h3>Nhận xét</h3>
+          <h3>{t.reviews}</h3>
           <div className="stats-value">12</div>
         </div>
         <div className="stats-card">
-          <h3>Bạn bè</h3>
+          <h3>{t.friends}</h3>
           <div className="stats-value">32</div>
         </div>
       </div>
       <div className="recent-activity">
-        <h3>Hoạt động gần đây</h3>
+        <h3>{t.recentActivity}</h3>
         <div className="activity-list">
           <div className="activity-item">
             <div className="activity-icon">
               <Icon fafa="faTrophy" />
             </div>
             <div className="activity-info">
-              <span className="activity-text">Đã đạt được thành tựu "First Win" trong Counter-Strike 2</span>
-              <span className="activity-time">2 giờ trước</span>
+              <span className="activity-text">{t.achievedIn} "First Win" {t.in} Counter-Strike 2</span>
+              <span className="activity-time">2 {t.hoursAgo}</span>
             </div>
           </div>
           <div className="activity-item">
@@ -286,8 +419,8 @@ const ProfileTab = () => {
               <Icon fafa="faGamepad" />
             </div>
             <div className="activity-info">
-              <span className="activity-text">Đã chơi Dota 2 trong 2 giờ</span>
-              <span className="activity-time">Hôm qua</span>
+              <span className="activity-text">{t.playedFor} Dota 2 {t.in} 2 {t.hoursPlayed}</span>
+              <span className="activity-time">{t.yesterday}</span>
             </div>
           </div>
         </div>
@@ -296,7 +429,7 @@ const ProfileTab = () => {
   );
 };
 
-const GameDetails = ({ game, onClose }) => {
+const GameDetails = ({ game, onClose, lang, t }) => {
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
@@ -317,47 +450,47 @@ const GameDetails = ({ game, onClose }) => {
               className={`tab ${activeTab === "overview" ? "active" : ""}`} 
               onClick={() => setActiveTab("overview")}
             >
-              Tổng quan
+              {t.overview}
             </div>
             <div 
               className={`tab ${activeTab === "dlc" ? "active" : ""}`}
               onClick={() => setActiveTab("dlc")}
             >
-              DLC
+              {t.dlc}
             </div>
             <div 
               className={`tab ${activeTab === "achievements" ? "active" : ""}`}
               onClick={() => setActiveTab("achievements")}
             >
-              Thành tựu
+              {t.achievementsTab}
             </div>
           </div>
           {activeTab === "overview" && (
             <div className="overview-content">
               <div className="description">
-                <h3>Mô tả</h3>
-                <p>{game.description}</p>
+                <h3>{t.description}</h3>
+                <p>{lang === "en" && game.englishDescription ? game.englishDescription : game.description}</p>
               </div>
               <div className="meta-info">
                 <div className="info-item">
-                  <span className="label">Phát hành:</span>
+                  <span className="label">{t.release}</span>
                   <span className="value">{game.releaseDate}</span>
                 </div>
                 <div className="info-item">
-                  <span className="label">Nhà phát triển:</span>
+                  <span className="label">{t.developer}</span>
                   <span className="value">{game.developer}</span>
                 </div>
                 <div className="info-item">
-                  <span className="label">Nhà phát hành:</span>
+                  <span className="label">{t.publisher}</span>
                   <span className="value">{game.publisher}</span>
                 </div>
                 <div className="info-item">
-                  <span className="label">Thể loại:</span>
+                  <span className="label">{t.genres}</span>
                   <span className="value">{game.genres.join(", ")}</span>
                 </div>
               </div>
               <div className="screenshots">
-                <h3>Ảnh chụp màn hình</h3>
+                <h3>{t.screenshots}</h3>
                 <div className="screenshots-grid">
                   {game.screenshots && game.screenshots.map((screenshot, index) => (
                     <div key={index} className="screenshot">
@@ -370,7 +503,7 @@ const GameDetails = ({ game, onClose }) => {
           )}
           {activeTab === "dlc" && (
             <div className="dlc-content">
-              <h3>Nội dung tải xuống có sẵn</h3>
+              <h3>{t.availableDLC}</h3>
               {game.dlc ? (
                 <div className="dlc-list">
                   {game.dlc.map((item, index) => (
@@ -385,13 +518,13 @@ const GameDetails = ({ game, onClose }) => {
                   ))}
                 </div>
               ) : (
-                <p>Không có DLC nào cho game này.</p>
+                <p>{t.noDLC}</p>
               )}
             </div>
           )}
           {activeTab === "achievements" && (
             <div className="achievements-content">
-              <h3>Thành tựu</h3>
+              <h3>{t.achievementsTab}</h3>
               {game.achievements ? (
                 <div className="achievements-list">
                   {game.achievements.map((achievement, index) => (
@@ -402,13 +535,13 @@ const GameDetails = ({ game, onClose }) => {
                       <div className="achievement-info">
                         <h4>{achievement.name}</h4>
                         <p>{achievement.description}</p>
-                        <div className="achievement-rarity">{achievement.rarity}% người chơi đạt được</div>
+                        <div className="achievement-rarity">{achievement.rarity}% {t.ofPlayersEarned}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p>Không có thành tựu nào cho game này.</p>
+                <p>{t.noAchievements}</p>
               )}
             </div>
           )}
@@ -422,16 +555,16 @@ const GameDetails = ({ game, onClose }) => {
               )}
             </div>
             <button className="install-button">
-              {game.installed ? "Chơi ngay" : "Cài đặt"}
+              {game.installed ? t.playNow : t.install}
             </button>
             <button className="wishlist-button">
-              <Icon fafa="faHeart" /> Thêm vào danh sách mong muốn
+              <Icon fafa="faHeart" /> {t.addToWishlist}
             </button>
           </div>
           <div className="system-requirements">
-            <h3>Yêu cầu hệ thống</h3>
+            <h3>{t.systemRequirements}</h3>
             <div className="requirements-section">
-              <h4>Tối thiểu:</h4>
+              <h4>{t.minimum}</h4>
               <ul>
                 {game.systemRequirements?.minimum.map((req, index) => (
                   <li key={index}>{req}</li>
@@ -439,7 +572,7 @@ const GameDetails = ({ game, onClose }) => {
               </ul>
             </div>
             <div className="requirements-section">
-              <h4>Đề nghị:</h4>
+              <h4>{t.recommended}</h4>
               <ul>
                 {game.systemRequirements?.recommended.map((req, index) => (
                   <li key={index}>{req}</li>

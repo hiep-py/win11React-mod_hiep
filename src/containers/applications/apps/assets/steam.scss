@@ -132,6 +132,22 @@ $steam-grey: #384959;
           }
         }
         
+        .language-toggle {
+          background-color: $steam-secondary;
+          color: $steam-highlight;
+          padding: 4px 8px;
+          border-radius: 3px;
+          margin-right: 15px;
+          font-size: 12px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.2s;
+          
+          &:hover {
+            background-color: lighten($steam-secondary, 10%);
+          }
+        }
+        
         .user-info {
           display: flex;
           align-items: center;
