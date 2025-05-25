@@ -23,6 +23,7 @@ export * from "./apps/vscode";
 export * from "./apps/zalo";
 export * from "./apps/perplexity";
 export * from "./apps/chatgpt";
+export * from "./apps/minecraft";
 export * from "./apps/iframeApp";
 
 export const ScreenPreview = () => {

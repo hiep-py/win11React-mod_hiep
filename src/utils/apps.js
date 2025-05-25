@@ -66,6 +66,12 @@ const apps = [
     action: "STEAMAPP",
   },
   {
+    name: "Minecraft",
+    icon: "minecraft",
+    type: "app",
+    action: "MINECRAFT",
+  },
+  {
     name: "Recycle Bin",
     icon: "bin0",
     type: "app",
