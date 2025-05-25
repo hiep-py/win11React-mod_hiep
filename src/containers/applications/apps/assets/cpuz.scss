@@ -144,29 +144,148 @@ $cpuz-text: #333;
     }
   }
   
-  // SVG Diagram styles
-  .cpu-diagram-svg,
-  .motherboard-diagram-svg,
-  .gpu-diagram-svg,
-  .nvme-diagram-svg,
-  .setup-diagram-svg {
+  // Hardware Image styles
+  .hardware-image {
     width: 100%;
-    max-height: 150px;
-    padding: 10px;
+    max-height: 300px;
+    padding: 15px;
     background: white;
     border: 1px solid $cpuz-border;
-    border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
     
     &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
     
-    svg {
+    img {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: contain;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    
+    .image-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 4px;
+      
+      .fallback-icon {
+        font-size: 48px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+      }
+      
+      .fallback-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+        text-align: center;
+      }
+    }
+  }
+  
+  // Hardware Image Grid for Peripherals
+  .hardware-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    
+    .hardware-image {
+      max-height: 250px;
+      
+      img {
+        max-height: 200px;
+      }
+    }
+    
+    // Responsive design
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+  }
+  
+  // Loading state for images
+  .hardware-image img {
+    opacity: 0;
+    animation: imageLoad 0.5s ease-in-out forwards;
+    animation-delay: 0.1s;
+    
+    @keyframes imageLoad {
+      from { 
+        opacity: 0; 
+        transform: scale(0.95);
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+    }
+  }
+  
+  // Enhanced hover effects
+  .hardware-image {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    &:hover::before {
+      transform: translateX(100%);
+    }
+    
+    // Special styling for different hardware types
+    &.cpu-image {
+      border-left: 4px solid #ED1C24;
+    }
+    
+    &.motherboard-image {
+      border-left: 4px solid #00539B;
+    }
+    
+    &.memory-image {
+      border-left: 4px solid #FF2222;
+    }
+    
+    &.gpu-image {
+      border-left: 4px solid #76B900;
+    }
+    
+    &.storage-image {
+      border-left: 4px solid #1428A0;
+    }
+    
+    &.cooling-image {
+      border-left: 4px solid #00D4FF;
+    }
+    
+    &.case-image {
+      border-left: 4px solid #FF6B35;
     }
   }
   
@@ -275,6 +394,12 @@ $cpuz-text: #333;
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
       }
+      
+      // Responsive design
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
     }
     
     .info-group {
@@ -326,12 +451,13 @@ $cpuz-text: #333;
       }
     }
     
-    // CPU Diagram, GPU Image, NVMe Image, Setup Image replaced with SVG variants
-    .cpu-diagram,
-    .motherboard-image,
-    .gpu-image,
-    .nvme-image,
-    .setup-image {
+    // Hardware Image Containers
+    .cpu-hardware-image,
+    .motherboard-hardware-image,
+    .memory-hardware-image,
+    .gpu-hardware-image,
+    .storage-hardware-image,
+    .peripherals-hardware-image {
       display: flex;
       justify-content: center;
       margin-top: 20px;

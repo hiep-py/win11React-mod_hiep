@@ -28,13 +28,13 @@ export const CPUZ = () => {
   }, [activeTab]);
 
   const cpuInfo = {
-    name: "AMD Ryzen 9 9950X3D",
-    cores: "16 cores, 32 threads",
-    clock: "5.7 GHz (max boost)",
+    name: "AMD Ryzen 9 9900X3D",
+    cores: "12 cores, 24 threads",
+    clock: "5.6 GHz (max boost)",
     cache: "3D V-Cache Gen 2",
     socket: "AM5",
-    process: "3nm TSMC",
-    tdp: "170W",
+    process: "4nm TSMC",
+    tdp: "120W",
     features: "PCIe 5.0, DDR5, AMD Pro"
   };
 
@@ -149,74 +149,129 @@ export const CPUZ = () => {
     </div>
   );
 
-  // Diagram Components
-  const CPUDiagram = () => (
-    <div className="cpu-diagram-svg">
-      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-        <rect x="50" y="30" width="100" height="100" rx="5" fill="#E0E0E0" stroke="#888" strokeWidth="2" />
-        <rect x="60" y="40" width="80" height="80" rx="3" fill="#C0C0C0" stroke="#888" strokeWidth="1" />
-        <circle cx="70" cy="50" r="3" fill="#333" />
-        <circle cx="130" cy="50" r="3" fill="#333" />
-        <circle cx="70" cy="110" r="3" fill="#333" />
-        <circle cx="130" cy="110" r="3" fill="#333" />
-        <text x="100" y="85" fontSize="12" fontWeight="bold" textAnchor="middle" fill="#444">AMD</text>
-        <text x="100" y="100" fontSize="6" textAnchor="middle" fill="#444">RYZEN 9 9950X3D</text>
-      </svg>
+  // Hardware Image Components
+  const CPUImage = () => (
+    <div className="hardware-image cpu-image">
+      <img 
+        src="/img/cpuz/3021650-ryzen-9-9900x3d-product.avif" 
+        alt="AMD Ryzen 9 9900X3D Processor"
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      <div className="image-fallback" style={{display: 'none'}}>
+        <div className="fallback-icon">🖥️</div>
+        <div className="fallback-text">AMD Ryzen 9 9900X3D</div>
+      </div>
     </div>
   );
 
-  const MotherboardDiagram = () => (
-    <div className="motherboard-diagram-svg">
-      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="160" height="120" rx="5" fill="#0F5132" stroke="#0A3622" strokeWidth="2" />
-        <rect x="40" y="30" width="40" height="40" rx="2" fill="#252525" stroke="#333" strokeWidth="1" />
-        <rect x="100" y="40" width="60" height="10" rx="1" fill="#888" />
-        <rect x="100" y="60" width="60" height="10" rx="1" fill="#888" />
-        <rect x="100" y="80" width="60" height="10" rx="1" fill="#888" />
-        <rect x="30" y="90" width="60" height="15" rx="1" fill="#AAAAAA" />
-        <rect x="30" y="115" width="120" height="15" rx="1" fill="#777" />
-        <text x="100" y="140" fontSize="8" textAnchor="middle" fill="#FFF">ASUS ROG CROSSHAIR</text>
-      </svg>
+  const MotherboardImage = () => (
+    <div className="hardware-image motherboard-image">
+      <img 
+        src="/img/cpuz/100043_96_asus-unveils-next-gen-x870-x850-mobos-ready-for-amds-new-zen-5-based-ryzen-9000-cpus-3846233084.png" 
+        alt="ASUS ROG Crosshair X870 Motherboard"
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      <div className="image-fallback" style={{display: 'none'}}>
+        <div className="fallback-icon">🔌</div>
+        <div className="fallback-text">ASUS ROG Crosshair X870</div>
+      </div>
     </div>
   );
 
-  const GPUDiagram = () => (
-    <div className="gpu-diagram-svg">
-      <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="160" height="80" rx="3" fill="#222" stroke="#444" strokeWidth="2" />
-        <rect x="30" y="30" width="100" height="60" rx="2" fill="#333" stroke="#555" strokeWidth="1" />
-        <circle cx="160" cy="40" r="10" fill="#444" stroke="#555" strokeWidth="1" />
-        <circle cx="160" cy="40" r="8" fill="#222" />
-        <circle cx="160" cy="40" r="4" fill="#555" />
-        <circle cx="160" cy="70" r="10" fill="#444" stroke="#555" strokeWidth="1" />
-        <circle cx="160" cy="70" r="8" fill="#222" />
-        <circle cx="160" cy="70" r="4" fill="#555" />
-        <text x="80" y="65" fontSize="10" fontWeight="bold" textAnchor="middle" fill="#0F0">NVIDIA</text>
-      </svg>
+  const GPUImage = () => (
+    <div className="hardware-image gpu-image">
+      <img 
+        src="/img/cpuz/NVIDIA GeForce RTX 5090.jpg" 
+        alt="NVIDIA GeForce RTX 5090 Graphics Card"
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      <div className="image-fallback" style={{display: 'none'}}>
+        <div className="fallback-icon">🎮</div>
+        <div className="fallback-text">NVIDIA GeForce RTX 5090</div>
+      </div>
     </div>
   );
 
-  const NVMeDiagram = () => (
-    <div className="nvme-diagram-svg">
-      <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="160" height="40" rx="3" fill="#000" stroke="#333" strokeWidth="1" />
-        <rect x="30" y="25" width="80" height="30" rx="2" fill="#222" stroke="#444" strokeWidth="1" />
-        <rect x="120" y="30" width="50" height="20" rx="1" fill="#111" stroke="#333" strokeWidth="1" />
-        <text x="80" y="45" fontSize="10" fontWeight="bold" textAnchor="middle" fill="#FFF">Samsung 990 Pro</text>
-      </svg>
+  const StorageImage = () => (
+    <div className="hardware-image storage-image">
+      <img 
+        src="/img/cpuz/Samsung 990 Pro 4TB NVMe SSD.jpg" 
+        alt="Samsung 990 Pro 4TB NVMe SSD"
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      <div className="image-fallback" style={{display: 'none'}}>
+        <div className="fallback-icon">💾</div>
+        <div className="fallback-text">Samsung 990 Pro 4TB</div>
+      </div>
     </div>
   );
 
-  const PCSetupDiagram = () => (
-    <div className="setup-diagram-svg">
-      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-        <rect x="60" y="20" width="80" height="60" rx="2" fill="#333" stroke="#555" strokeWidth="1" />
-        <rect x="70" y="30" width="60" height="40" rx="1" fill="#0078D7" stroke="#0056A3" strokeWidth="1" />
-        <rect x="40" y="85" width="120" height="25" rx="2" fill="#222" stroke="#444" strokeWidth="1" />
-        <rect x="40" y="115" width="120" height="5" rx="1" fill="#444" />
-        <rect x="85" y="125" width="30" height="15" rx="3" fill="#555" />
-        <text x="100" y="55" fontSize="10" fontWeight="bold" textAnchor="middle" fill="#FFF">DESKTOP</text>
-      </svg>
+  const MemoryImage = () => (
+    <div className="hardware-image memory-image">
+      <img 
+        src="/img/cpuz/G.Skill Trident Z5 RGB 96GB (DDR5-8000).png" 
+        alt="G.Skill Trident Z5 RGB 96GB DDR5-8000 Memory"
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.nextSibling.style.display = 'block';
+        }}
+      />
+      <div className="image-fallback" style={{display: 'none'}}>
+        <div className="fallback-icon">🧠</div>
+        <div className="fallback-text">G.Skill Trident Z5 RGB</div>
+      </div>
+    </div>
+  );
+
+  const PeripheralsImage = () => (
+    <div className="hardware-image-grid">
+      <div className="hardware-image cooling-image">
+        <img 
+          src="/img/cpuz/Corsair iCUE H170i ELITE LCD XT.jpg" 
+          alt="Corsair iCUE H170i ELITE LCD XT CPU Cooler"
+          loading="lazy"
+          onError={(e) => {
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'block';
+          }}
+        />
+        <div className="image-fallback" style={{display: 'none'}}>
+          <div className="fallback-icon">❄️</div>
+          <div className="fallback-text">Corsair H170i ELITE</div>
+        </div>
+      </div>
+      <div className="hardware-image case-image">
+        <img 
+          src="/img/cpuz/Lian Li O11 Dynamic EVO XL.jpg" 
+          alt="Lian Li O11 Dynamic EVO XL Case"
+          loading="lazy"
+          onError={(e) => {
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'block';
+          }}
+        />
+        <div className="image-fallback" style={{display: 'none'}}>
+          <div className="fallback-icon">🏠</div>
+          <div className="fallback-text">Lian Li O11 Dynamic EVO XL</div>
+        </div>
+      </div>
     </div>
   );
   
@@ -284,8 +339,8 @@ export const CPUZ = () => {
               </div>
             </div>
             
-            <div className="cpu-diagram">
-              <CPUDiagram />
+            <div className="cpu-hardware-image">
+              <CPUImage />
             </div>
           </div>
         );
@@ -339,8 +394,8 @@ export const CPUZ = () => {
               </div>
             </div>
             
-            <div className="motherboard-image">
-              <MotherboardDiagram />
+            <div className="motherboard-hardware-image">
+              <MotherboardImage />
             </div>
           </div>
         );
@@ -384,6 +439,10 @@ export const CPUZ = () => {
                   <div className="info-value">{memoryInfo.voltage}</div>
                 </div>
               </div>
+            </div>
+            
+            <div className="memory-hardware-image">
+              <MemoryImage />
             </div>
             
             <div className="memory-slots">
@@ -452,8 +511,8 @@ export const CPUZ = () => {
               </div>
             </div>
             
-            <div className="gpu-image">
-              <GPUDiagram />
+            <div className="gpu-hardware-image">
+              <GPUImage />
             </div>
           </div>
         );
@@ -503,8 +562,8 @@ export const CPUZ = () => {
               </div>
             </div>
             
-            <div className="nvme-image">
-              <NVMeDiagram />
+            <div className="storage-hardware-image">
+              <StorageImage />
             </div>
           </div>
         );
@@ -553,8 +612,8 @@ export const CPUZ = () => {
               </div>
             </div>
             
-            <div className="setup-image">
-              <PCSetupDiagram />
+            <div className="peripherals-hardware-image">
+              <PeripheralsImage />
             </div>
           </div>
         );
