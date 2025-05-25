@@ -60,6 +60,12 @@ const apps = [
     action: "WNSTORE",
   },
   {
+    name: "Steam",
+    icon: "steam",
+    type: "app",
+    action: "STEAMAPP",
+  },
+  {
     name: "Recycle Bin",
     icon: "bin0",
     type: "app",

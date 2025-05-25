@@ -1,0 +1,895 @@
+// Steam app styles
+$steam-bg-dark: #1b2838;
+$steam-bg-darker: #171a21;
+$steam-text: #c6d4df;
+$steam-highlight: #66c0f4;
+$steam-accent: #1a9fff;
+$steam-secondary: #2a475e;
+$steam-green: #5c7e10;
+$steam-grey: #384959;
+
+.steam-app {
+  background-color: $steam-bg-dark;
+  color: $steam-text;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  
+  .windowScreen {
+    background-color: $steam-bg-dark;
+    overflow: hidden;
+  }
+  
+  .steam-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  
+  // Sidebar styles
+  .steam-sidebar {
+    width: 240px;
+    background-color: $steam-bg-darker;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .steam-logo {
+      padding: 15px;
+      text-align: center;
+      
+      img {
+        max-width: 80%;
+      }
+    }
+    
+    .steam-nav {
+      display: flex;
+      flex-direction: column;
+      
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: $steam-text;
+        transition: background-color 0.2s;
+        cursor: pointer;
+        
+        i {
+          margin-right: 12px;
+          font-size: 18px;
+          width: 24px;
+          text-align: center;
+        }
+        
+        span {
+          font-size: 14px;
+        }
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &.active {
+          background-color: $steam-secondary;
+          color: $steam-highlight;
+        }
+      }
+    }
+  }
+  
+  // Content area styles
+  .steam-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    
+    .steam-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: $steam-secondary;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      
+      .search-bar {
+        position: relative;
+        
+        input {
+          background-color: $steam-bg-darker;
+          border: none;
+          border-radius: 3px;
+          padding: 8px 12px 8px 35px;
+          color: $steam-text;
+          width: 300px;
+          
+          &::placeholder {
+            color: rgba(198, 212, 223, 0.5);
+          }
+        }
+        
+        i {
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: rgba(198, 212, 223, 0.5);
+        }
+      }
+      
+      .header-actions {
+        display: flex;
+        align-items: center;
+        
+        i {
+          margin-left: 15px;
+          font-size: 18px;
+          cursor: pointer;
+          
+          &:hover {
+            color: $steam-highlight;
+          }
+        }
+        
+        .user-info {
+          display: flex;
+          align-items: center;
+          margin-left: 20px;
+          
+          img {
+            width: 32px;
+            height: 32px;
+            border-radius: 3px;
+            margin-right: 8px;
+          }
+          
+          span {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  
+  // Library tab styles
+  .library-container {
+    padding: 20px;
+    
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      
+      .game-card {
+        background-color: $steam-secondary;
+        border-radius: 3px;
+        overflow: hidden;
+        transition: transform 0.2s;
+        cursor: pointer;
+        
+        &:hover {
+          transform: translateY(-5px);
+        }
+        
+        .game-image {
+          height: 120px;
+          overflow: hidden;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        
+        .game-info {
+          padding: 10px;
+          
+          h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .game-meta {
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            color: rgba(198, 212, 223, 0.7);
+            
+            .playtime {
+              margin-bottom: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Store tab styles
+  .store-container {
+    padding: 20px;
+    
+    h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    
+    .featured-section {
+      margin-bottom: 30px;
+      
+      .featured-carousel {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        
+        .featured-item {
+          flex: 0 0 500px;
+          height: 250px;
+          position: relative;
+          border-radius: 3px;
+          overflow: hidden;
+          cursor: pointer;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .featured-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            
+            h3 {
+              font-size: 18px;
+              margin-bottom: 5px;
+            }
+            
+            p {
+              font-size: 13px;
+              opacity: 0.8;
+              margin-bottom: 10px;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+            }
+            
+            .price {
+              font-size: 16px;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+    
+    .categories-section {
+      margin-bottom: 30px;
+      
+      .categories-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        
+        .category {
+          background-color: $steam-secondary;
+          padding: 8px 15px;
+          border-radius: 3px;
+          font-size: 14px;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: $steam-accent;
+          }
+        }
+      }
+    }
+    
+    .new-releases {
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+        
+        .store-game-card {
+          background-color: $steam-secondary;
+          border-radius: 3px;
+          overflow: hidden;
+          transition: transform 0.2s;
+          cursor: pointer;
+          
+          &:hover {
+            transform: translateY(-5px);
+          }
+          
+          img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+          }
+          
+          h3 {
+            padding: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .price {
+            padding: 0 10px 10px;
+            font-size: 14px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+  
+  // Community tab styles
+  .community-container {
+    padding: 20px;
+    
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    
+    .community-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      
+      .community-card {
+        background-color: $steam-secondary;
+        border-radius: 3px;
+        padding: 15px;
+        
+        h3 {
+          margin-bottom: 15px;
+          font-size: 18px;
+          font-weight: 500;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          padding-bottom: 10px;
+        }
+        
+        .activity-list {
+          .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              margin-right: 10px;
+            }
+            
+            .activity-info {
+              font-size: 14px;
+              
+              .user-name, .game-name {
+                color: $steam-highlight;
+              }
+            }
+          }
+        }
+        
+        .news-list {
+          .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            
+            h4 {
+              font-size: 16px;
+              color: $steam-highlight;
+              margin-bottom: 5px;
+            }
+            
+            p {
+              font-size: 14px;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Profile tab styles
+  .profile-container {
+    padding: 20px;
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      
+      .profile-avatar {
+        margin-right: 20px;
+        
+        img {
+          width: 80px;
+          height: 80px;
+          border-radius: 5px;
+          border: 2px solid $steam-accent;
+        }
+      }
+      
+      .profile-info {
+        h2 {
+          font-size: 24px;
+          margin-bottom: 5px;
+        }
+        
+        .profile-status {
+          color: $steam-green;
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+        
+        .profile-level {
+          font-size: 14px;
+          background-color: $steam-secondary;
+          display: inline-block;
+          padding: 3px 8px;
+          border-radius: 3px;
+        }
+      }
+    }
+    
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+      
+      .stats-card {
+        background-color: $steam-secondary;
+        border-radius: 3px;
+        padding: 15px;
+        text-align: center;
+        
+        h3 {
+          font-size: 14px;
+          margin-bottom: 8px;
+          opacity: 0.8;
+        }
+        
+        .stats-value {
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+    }
+    
+    .recent-activity {
+      background-color: $steam-secondary;
+      border-radius: 3px;
+      padding: 15px;
+      
+      h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
+      }
+      
+      .activity-list {
+        .activity-item {
+          display: flex;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          
+          .activity-icon {
+            width: 40px;
+            height: 40px;
+            background-color: $steam-grey;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            
+            i {
+              font-size: 18px;
+            }
+          }
+          
+          .activity-info {
+            flex: 1;
+            
+            .activity-text {
+              font-size: 14px;
+              display: block;
+              margin-bottom: 3px;
+            }
+            
+            .activity-time {
+              font-size: 12px;
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Game details styles
+  .game-details {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .details-header {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: $steam-secondary;
+      
+      .back-button {
+        background: none;
+        border: none;
+        color: $steam-text;
+        font-size: 18px;
+        cursor: pointer;
+        margin-right: 15px;
+        
+        &:hover {
+          color: $steam-highlight;
+        }
+      }
+      
+      h2 {
+        font-size: 22px;
+        font-weight: 500;
+      }
+    }
+    
+    .details-content {
+      flex: 1;
+      display: flex;
+      overflow-y: auto;
+      
+      .details-main {
+        flex: 1;
+        padding: 20px;
+        
+        .main-image {
+          margin-bottom: 20px;
+          
+          img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 3px;
+          }
+        }
+        
+        .tabs {
+          display: flex;
+          margin-bottom: 20px;
+          border-bottom: 1px solid $steam-secondary;
+          
+          .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            
+            &:hover {
+              color: $steam-highlight;
+            }
+            
+            &.active {
+              color: $steam-highlight;
+              border-bottom: 2px solid $steam-highlight;
+            }
+          }
+        }
+        
+        // Overview tab
+        .overview-content {
+          .description {
+            margin-bottom: 25px;
+            
+            h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+            }
+            
+            p {
+              line-height: 1.6;
+              font-size: 14px;
+            }
+          }
+          
+          .meta-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 25px;
+            margin-bottom: 25px;
+            
+            .info-item {
+              font-size: 14px;
+              
+              .label {
+                font-weight: 700;
+                margin-right: 5px;
+              }
+              
+              .value {
+                color: $steam-highlight;
+              }
+            }
+          }
+          
+          .screenshots {
+            h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+            }
+            
+            .screenshots-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 10px;
+              
+              .screenshot {
+                img {
+                  width: 100%;
+                  height: 120px;
+                  object-fit: cover;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  
+                  &:hover {
+                    opacity: 0.8;
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // DLC tab
+        .dlc-content {
+          h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+          }
+          
+          .dlc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            
+            .dlc-item {
+              display: flex;
+              background-color: $steam-secondary;
+              border-radius: 3px;
+              overflow: hidden;
+              
+              img {
+                width: 120px;
+                height: 80px;
+                object-fit: cover;
+              }
+              
+              .dlc-info {
+                flex: 1;
+                padding: 10px 15px;
+                
+                h4 {
+                  font-size: 16px;
+                  margin-bottom: 5px;
+                }
+                
+                p {
+                  font-size: 13px;
+                  opacity: 0.8;
+                  margin-bottom: 10px;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                }
+                
+                .dlc-price {
+                  font-size: 14px;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+        
+        // Achievements tab
+        .achievements-content {
+          h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+          }
+          
+          .achievements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            
+            .achievement-item {
+              display: flex;
+              background-color: $steam-secondary;
+              border-radius: 3px;
+              padding: 10px;
+              
+              .achievement-icon {
+                margin-right: 15px;
+                
+                img {
+                  width: 64px;
+                  height: 64px;
+                }
+              }
+              
+              .achievement-info {
+                flex: 1;
+                
+                h4 {
+                  font-size: 16px;
+                  color: $steam-highlight;
+                  margin-bottom: 5px;
+                }
+                
+                p {
+                  font-size: 13px;
+                  margin-bottom: 8px;
+                  opacity: 0.8;
+                }
+                
+                .achievement-rarity {
+                  font-size: 12px;
+                  opacity: 0.7;
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      .details-sidebar {
+        width: 300px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        
+        .purchase-section {
+          background-color: $steam-secondary;
+          padding: 15px;
+          border-radius: 3px;
+          margin-bottom: 20px;
+          
+          .price-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            
+            .price {
+              font-size: 22px;
+              font-weight: 700;
+            }
+            
+            .discount {
+              margin-left: 10px;
+              background-color: $steam-green;
+              padding: 3px 8px;
+              border-radius: 3px;
+              font-weight: 700;
+            }
+          }
+          
+          .install-button {
+            width: 100%;
+            background-color: $steam-green;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 10px;
+            
+            &:hover {
+              background-color: lighten($steam-green, 5%);
+            }
+          }
+          
+          .wishlist-button {
+            width: 100%;
+            background-color: $steam-grey;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            i {
+              margin-right: 8px;
+            }
+            
+            &:hover {
+              background-color: lighten($steam-grey, 5%);
+            }
+          }
+        }
+        
+        .system-requirements {
+          background-color: $steam-secondary;
+          padding: 15px;
+          border-radius: 3px;
+          
+          h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          .requirements-section {
+            margin-bottom: 15px;
+            
+            h4 {
+              font-size: 14px;
+              color: $steam-highlight;
+              margin-bottom: 8px;
+            }
+            
+            ul {
+              list-style: none;
+              padding-left: 0;
+              
+              li {
+                font-size: 13px;
+                line-height: 1.5;
+                margin-bottom: 5px;
+                padding-left: 15px;
+                position: relative;
+                
+                &:before {
+                  content: '•';
+                  position: absolute;
+                  left: 0;
+                  color: $steam-highlight;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 
