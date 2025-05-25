@@ -1,0 +1,435 @@
+// CPU-Z app styles
+$cpuz-bg: #ffffff;
+$cpuz-accent: #0078d7;
+$cpuz-border: #c0c0c0;
+$cpuz-text: #333;
+
+.cpuz-app {
+  background-color: $cpuz-bg;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+  // Làm thanh toolbar giống VS Code - trong suốt với giao diện tối
+  & > .toolbar {
+    background-color: rgba(30, 30, 30, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(80, 80, 80, 0.3);
+    color: #e0e0e0;
+    height: 32px;
+    
+    .uicon {
+      filter: brightness(2);
+    }
+    
+    .appName {
+      color: #e0e0e0;
+      font-weight: 400;
+      font-size: 12px;
+    }
+    
+    .actbtns {
+      button {
+        background-color: transparent;
+        color: #e0e0e0;
+        height: 32px;
+        width: 46px;
+        border-radius: 0;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &:last-child:hover {
+          background-color: #e81123;
+        }
+      }
+    }
+  }
+  
+  .windowScreen {
+    background-color: $cpuz-bg;
+    overflow: hidden;
+  }
+  
+  .cpuz-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: $cpuz-text;
+  }
+  
+  // Loading animation
+  .loading-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 120, 215, 0.2);
+      border-top: 3px solid rgba(0, 120, 215, 0.8);
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+      margin-bottom: 15px;
+    }
+    
+    .loading-text {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+  
+  // SVG Logo styles
+  .vendor-logo-svg {
+    height: 40px;
+    margin-right: 15px;
+    background-color: #f5f5f5;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      height: 30px;
+      width: 50px;
+    }
+    
+    span {
+      display: none; // Hide text label by default
+    }
+    
+    &.amd-logo {
+      svg {
+        color: #ED1C24;
+      }
+    }
+    
+    &.asus-logo {
+      svg {
+        color: #00539B;
+      }
+    }
+    
+    &.nvidia-logo {
+      svg {
+        color: #76B900;
+      }
+    }
+    
+    &.gskill-logo {
+      svg {
+        color: #FF2222;
+      }
+    }
+    
+    &.samsung-logo {
+      svg {
+        color: #1428A0;
+      }
+    }
+  }
+  
+  // SVG Diagram styles
+  .cpu-diagram-svg,
+  .motherboard-diagram-svg,
+  .gpu-diagram-svg,
+  .nvme-diagram-svg,
+  .setup-diagram-svg {
+    width: 100%;
+    max-height: 150px;
+    padding: 10px;
+    background: white;
+    border: 1px solid $cpuz-border;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  // CPU-Z Logo for About tab
+  .cpuz-logo-container {
+    margin-bottom: 20px;
+    
+    .cpuz-logo-svg {
+      height: 80px;
+      width: 80px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px;
+      background-color: #f8f8f8;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      margin: 0 auto;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+      
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  
+  // Tabs styles
+  .cpuz-tabs {
+    display: flex;
+    background-color: #e1e1e1;
+    border-bottom: 1px solid $cpuz-border;
+    padding: 4px 5px 0;
+    
+    .tab {
+      padding: 6px 16px;
+      margin-right: 2px;
+      border: 1px solid $cpuz-border;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      background-color: #d1d1d1;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.1s;
+      
+      &:hover {
+        background-color: #e8e8e8;
+      }
+      
+      &.active {
+        background-color: $cpuz-bg;
+        position: relative;
+        top: 1px;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // Content area
+  .cpuz-content {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    
+    .tab-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.3s ease-in-out;
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+    
+    .cpuz-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $cpuz-border;
+      
+      .cpu-name, 
+      .motherboard-name, 
+      .memory-name, 
+      .gpu-name, 
+      .storage-name,
+      .peripherals-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $cpuz-accent;
+      }
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+      animation: slideIn 0.4s ease-out;
+      
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+    
+    .info-group {
+      border: 1px solid $cpuz-border;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .info-title {
+        background-color: #e1e1e1;
+        padding: 8px 10px;
+        font-weight: 600;
+        border-bottom: 1px solid $cpuz-border;
+        color: #444;
+      }
+      
+      .info-row {
+        display: flex;
+        padding: 8px 10px;
+        border-bottom: 1px solid #e5e5e5;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+        
+        .info-label {
+          flex: 0 0 45%;
+          font-size: 13px;
+          color: #555;
+          font-weight: 500;
+        }
+        
+        .info-value {
+          flex: 1;
+          font-size: 13px;
+          font-weight: 600;
+          color: #222;
+        }
+      }
+    }
+    
+    // CPU Diagram, GPU Image, NVMe Image, Setup Image replaced with SVG variants
+    .cpu-diagram,
+    .motherboard-image,
+    .gpu-image,
+    .nvme-image,
+    .setup-image {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      animation: fadeUp 0.5s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+      
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+    
+    // Memory slots
+    .memory-slots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+      animation: fadeUp 0.5s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+      
+      .slot {
+        border: 1px solid $cpuz-border;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: #e8e8e8;
+        transition: transform 0.2s, box-shadow 0.2s;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        &.filled {
+          background-color: #e0f0ff;
+          border-color: #a0c0e0;
+        }
+        
+        .slot-name {
+          font-weight: 600;
+          font-size: 13px;
+          margin-bottom: 5px;
+        }
+        
+        .slot-info {
+          font-size: 12px;
+          color: #444;
+        }
+      }
+    }
+    
+    // About tab
+    .about-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.5s ease-out;
+      
+      .about-info {
+        text-align: center;
+        
+        .about-version {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: $cpuz-accent;
+        }
+        
+        .about-copyright {
+          font-size: 12px;
+          margin-bottom: 15px;
+          color: #555;
+        }
+        
+        .about-description {
+          font-size: 14px;
+          max-width: 400px;
+          margin: 0 auto 15px;
+          line-height: 1.5;
+        }
+        
+        .about-website {
+          font-size: 14px;
+          color: $cpuz-accent;
+          font-weight: 500;
+          cursor: pointer;
+          transition: color 0.2s;
+          
+          &:hover {
+            color: darken($cpuz-accent, 10%);
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+} 

@@ -336,6 +336,12 @@ const apps = [
     type: "app",
     action: "CHATGPT",
   },
+  {
+    name: "CPU-Z",
+    icon: "cpuz",
+    type: "app",
+    action: "CPUZ",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {
